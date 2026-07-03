@@ -12,21 +12,12 @@ function App() {
 
   return (
     <main className="home-page">
-      <button
-        className={menuOpen ? 'hamburger open' : 'hamburger'}
-        onClick={() => setMenuOpen((s) => !s)}
-        aria-expanded={menuOpen}
-        aria-label="Toggle menu"
-        type="button"
-      >
-        <span className="line" />
-        <span className="line" />
-        <span className="line" />
-      </button>
+      
 
       <Menu menuOpen={menuOpen} setMenuOpen={setMenuOpen} setActiveTab={setActiveTab} />
 
       <Headers logo={logo} activeTab={activeTab} setActiveTab={setActiveTab}></Headers>
+
       <section className="hero-section">
         <h1>Trending {activeTab == 'packages'? 'Packages' : 'Destinations'}</h1>
         {/* <p>

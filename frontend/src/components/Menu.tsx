@@ -2,6 +2,18 @@ export default function Menu({ menuOpen, setMenuOpen, setActiveTab }: { menuOpen
 
     return (
         <>
+            <button
+                className={menuOpen ? 'hamburger open' : 'hamburger'}
+                onClick={() => setMenuOpen(!menuOpen)}
+                aria-expanded={menuOpen}
+                aria-label="Toggle menu"
+                type="button"
+            >
+                <span className="line" />
+                <span className="line" />
+                <span className="line" />
+            </button>
+
             {menuOpen && (<div className="backdrop" onClick={() => setMenuOpen(false)} />)}
 
             <aside className={menuOpen ? 'sidebar open' : 'sidebar'} aria-hidden={!menuOpen}>
