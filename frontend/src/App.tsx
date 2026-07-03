@@ -1,12 +1,16 @@
 import { useEffect, useState } from 'react'
 import './App.css'
 import logo from './assets/Tripkerala-logo-new.png'
-import Packages from './components/Packages'
-import Destination from './components/Destination'
+// import Packages from './components/Packages'
+// import Destination from './components/Destination'
 import Headers from './components/Header'
 import Menu from './components/Menu'
 import getWeather from './services/weatherApi'
 
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import Home from './components/Home'
+import About from './components/About'
+import Contact from './components/Contact'
 
 function App() {
   const [activeTab, setActiveTab] = useState<'packages' | 'destination'>('packages')
@@ -28,24 +32,19 @@ function App() {
 
   return (
     <main className="home-page">
-      
 
-      <Menu menuOpen={menuOpen} setMenuOpen={setMenuOpen} setActiveTab={setActiveTab} />
-
+      <BrowserRouter>
       <Headers logo={logo} activeTab={activeTab} setActiveTab={setActiveTab}></Headers>
-
-      <section className="hero-section">
-        <h1>Trending {activeTab == 'packages'? 'Packages' : 'Destinations'}</h1>
-        {/* <p>
-          Choose a tab to explore curated Kerala tour packages or discover
-          top destinations across the state.
-        </p> */}
-      </section>
-
-      <section className="content-section">
-        {activeTab === 'packages' ? <Packages /> : <Destination />}
-      </section>
-
+      
+        <Menu menuOpen={menuOpen} setMenuOpen={setMenuOpen} setActiveTab={setActiveTab} />
+        
+        <Routes>
+          <Route path="/" element={<Home activeTab={activeTab} setActiveTab={setActiveTab} />} />
+          <Route path="/:tab" element={<Home activeTab={activeTab} setActiveTab={setActiveTab} />} />
+          <Route path="/about" element={<About/>} />
+          <Route path="/contact" element={<Contact />} />
+        </Routes>
+      </BrowserRouter>
 
     </main>
   )

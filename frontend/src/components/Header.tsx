@@ -1,5 +1,9 @@
+import { useNavigate } from "react-router-dom";
+
 export default function Header({logo, activeTab, setActiveTab}: {logo:any, activeTab: 'packages' | 'destination', setActiveTab: (tab: 'packages' | 'destination') => void}) {
 
+    const navigate = useNavigate();
+    
     return(
         <header className="home-header">
         <div className="brand">
@@ -11,14 +15,14 @@ export default function Header({logo, activeTab, setActiveTab}: {logo:any, activ
         <nav className="tab-list" aria-label="Home page tabs">
           <button
             className={activeTab === 'packages' ? 'tab active' : 'tab'}
-            onClick={() => setActiveTab('packages')}
+            onClick={() => navigate('/packages')}
             type="button"
           >
             Packages
           </button>
           <button
             className={activeTab === 'destination' ? 'tab active' : 'tab'}
-            onClick={() => setActiveTab('destination')}
+            onClick={() => navigate('destination')}
             type="button"
           >
             Destination
