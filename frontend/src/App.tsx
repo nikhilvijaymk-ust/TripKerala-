@@ -1,121 +1,98 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import heroImg from './assets/hero.png'
 import './App.css'
+import logo from './assets/Tripkerala-logo-new.png'
+import Packages from './components/Packages'
+import Destination from './components/Destination'
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [activeTab, setActiveTab] = useState<'packages' | 'destination'>('packages')
+  const [menuOpen, setMenuOpen] = useState<boolean>(false)
 
   return (
-    <>
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
-        </div>
-        <div>
-          <h1>Get started</h1>
-          <p>
-            Edit <code>src/App.tsx</code> and save to test <code>HMR</code>
-          </p>
-        </div>
-        <button
-          type="button"
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
-        >
-          Count is {count}
-        </button>
-      </section>
+    <main className="home-page">
+      <button
+        className={menuOpen ? 'hamburger open' : 'hamburger'}
+        onClick={() => setMenuOpen((s) => !s)}
+        aria-expanded={menuOpen}
+        aria-label="Toggle menu"
+        type="button"
+      >
+        <span className="line" />
+        <span className="line" />
+        <span className="line" />
+      </button>
 
-      <div className="ticks"></div>
+      {menuOpen && <div className="backdrop" onClick={() => setMenuOpen(false)} />}
 
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
+      <aside className={menuOpen ? 'sidebar open' : 'sidebar'} aria-hidden={!menuOpen}>
+        <button className="close-btn" onClick={() => setMenuOpen(false)} aria-label="Close menu">×</button>
+        <nav>
           <ul>
             <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
+              <button
+                type="button"
+                onClick={() => {
+                  setActiveTab('packages')
+                  setMenuOpen(false)
+                }}
+              >
+                Packages
+              </button>
             </li>
             <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
+              <button
+                type="button"
+                onClick={() => {
+                  setActiveTab('destination')
+                  setMenuOpen(false)
+                }}
+              >
+                Destination
+              </button>
+            </li>
+            <li>
+              <button type="button" onClick={() => setMenuOpen(false)}>About</button>
             </li>
           </ul>
+        </nav>
+      </aside>
+      <header className="home-header">
+        <div className="brand">
+           <img src={logo} alt="TripKerala Logo" className="brand-logo" />
+          <span>TripKerala</span>
+         
+          <p>Explore packages and destinations</p>
         </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
-        </div>
+        <nav className="tab-list" aria-label="Home page tabs">
+          <button
+            className={activeTab === 'packages' ? 'tab active' : 'tab'}
+            onClick={() => setActiveTab('packages')}
+            type="button"
+          >
+            Packages
+          </button>
+          <button
+            className={activeTab === 'destination' ? 'tab active' : 'tab'}
+            onClick={() => setActiveTab('destination')}
+            type="button"
+          >
+            Destination
+          </button>
+        </nav>
+      </header>
+
+      <section className="hero-section">
+        <h1>Trending Destinations</h1>
+        {/* <p>
+          Choose a tab to explore curated Kerala tour packages or discover
+          top destinations across the state.
+        </p> */}
       </section>
 
-      <div className="ticks"></div>
-      <section id="spacer"></section>
-    </>
+      <section className="content-section">
+        {activeTab === 'packages' ? <Packages /> : <Destination />}
+      </section>
+    </main>
   )
 }
 
