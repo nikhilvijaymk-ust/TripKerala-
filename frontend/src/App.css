@@ -95,7 +95,7 @@
   width: 260px;
   transform: translateX(-100%);
   transition: transform 0.28s ease;
-  background: #88d1b5; /* updated sidebar color */
+  background: #88d1b5 !important; /* updated sidebar color */
   color: #04221a;
   padding: 20px 18px;
   z-index: 1205;
@@ -218,6 +218,7 @@
   background: #ffffff;
   box-shadow: 0 8px 24px rgba(15, 23, 42, 0.06);
   border: 1px solid rgba(148, 163, 184, 0.18);
+  min-height: 260px;
 }
 
 .destination-card {
@@ -229,6 +230,7 @@
   background-position: center;
   background-repeat: no-repeat;
   box-shadow: 0 8px 40px rgba(0, 0, 0, 0.18);
+  min-height: 215px;
 }
 
 .destination-card::before {
@@ -254,6 +256,15 @@
 
 .destination-card.varkala {
   background-image: url('./assets/varkala.jpg');
+}
+.destination-card.kozhikode {
+  background-image: url('./assets/kozhikode.jpg');
+}
+.destination-card.athirappilly {
+  background-image: url('./assets/athirapally.jpg');
+}
+.destination-card.munnar {
+  background-image: url('./assets/munnar.jpg');
 }
 
 .card h2 {
