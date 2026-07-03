@@ -82,7 +82,7 @@ function App() {
       </header>
 
       <section className="hero-section">
-        <h1>Trending Destinations</h1>
+        <h1>Trending {activeTab == 'packages'? 'Packages' : 'Destinations'}</h1>
         {/* <p>
           Choose a tab to explore curated Kerala tour packages or discover
           top destinations across the state.
